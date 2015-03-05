@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.number, .oper, .res {
+			width: 50px;
+			height: 50px;
+			background-color: gold;
+			color: red;
+		}
+		.main {
+			margin: 200px auto;
+			width: 170px;
+			height: 500px;
+		}
+		.oper, .res {
+			color: magenta;
+			background-color: yellow;
+		}
+		#screen{
+			width: 136px;
+			height: 40px;
+			font-size: 22px;
+			font-weight: bold;
+			border: 1px solid black;
+			color: #aaa;
+			border-radius: 10px 10px 0px 0px;
+			padding: 10px;
+		}
+		.res {
+			width: 158px;
+			border-radius: 0px 0px 10px 10px;
+		}
+		#reset {
+			width: 158px;
+			color: black;
+			font-size: 22px;
+			font-weight: bold;
+			background: grey;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div id="screen"></div>
+		<button id="a1" class="number">1</button>
+		<button id="a2" class="number">2</button>
+		<button id="a3" class="number">3</button>
+		<button id="a4" class="number">4</button>
+		<button id="a5" class="number">5</button>
+		<button id="a6" class="number">6</button>
+		<button id="a7" class="number">7</button>
+		<button id="a8" class="number">8</button>
+		<button id="a9" class="number">9</button>
+		<button id="b1" class="oper">+</button>
+		<button id="a0" class="number">0</button>
+		<button id="b2" class="oper">-</button>
+		<button id="b3" class="res">=</button>
+		<button id="reset">RESET</button>
+	</div>
+
+
+
+	<script type="text/javascript">
+	
+
+
+	O = {
+		res: 0,
+		sumA: function() {
+			var s = 0;
+			for (var i = 0; i < arguments.length; i++) {
+				s += arguments[i]
+			};
+			return s;
+		},
+		add: function() {
+			this.res += this.sumA.apply({}, Array.prototype.slice.call(arguments));
+			return this;
+		},
+		sub: function() {
+			this.res -= this.sumA.apply({}, Array.prototype.slice.call(arguments));
+			return this;
+		},
+		result: function() {
+			return this.res;
+		}
+	}
+
+
+	for (var j = 0 ; j < 10; j++) {
+ 		document.getElementById('a' + j).onclick = myFunction.bind({a:j})
+			};
+			function myFunction() {
+				document.getElementById('screen').innerHTML = this.a;
+			
+			}
+
+
+ 	document.getElementById('b1').onclick = plus;
+ 	document.getElementById('b2').onclick = sub;	
+ 	document.getElementById('b3').onclick = result;
+ 	document.getElementById('reset').onclick = reset;
+
+		
+		
+ 	function plus() {
+
+ 		
+ 		l = document.getElementById('screen').textContent*1;
+ 		
+ 		O.add(l);
+ 	}
+ 	function sub() {
+ 		
+ 		l = document.getElementById('screen').textContent*1;	
+ 		O.sub(l)
+ 	}
+ 	function result() {
+ 		document.getElementById('screen').innerHTML = O.result();
+ 		
+ 	}
+ 	function reset() {
+ 		document.getElementById('screen').innerHTML = 0;
+ 		O.res = 0;
+ 		
+ 	}
+	
+		
+
+	</script>
+</body>
+</html>
